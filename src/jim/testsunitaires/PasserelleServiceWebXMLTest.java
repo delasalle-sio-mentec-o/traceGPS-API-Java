@@ -74,20 +74,20 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Suppression effectuée ; un courriel va être envoyé à l'utilisateur.", msg);	
 	}
 	
-	//@Test
-//	public void testChangerDeMdp() {
-//		String msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "passepasse", "passepassepasse");
-//		assertEquals("Erreur : le nouveau mot de passe et sa confirmation sont différents.", msg);
-//		
-//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "passepasse", "passepasse");
-//		assertEquals("Erreur : authentification incorrecte.", msg);
-//		
-//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "mdputilisateurrrr", "mdputilisateurrrr");
-//		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
-//		
-//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "mdputilisateur", "mdputilisateur");
-//		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
-//	}	
+	@Test
+	public void testChangerDeMdp() {
+		String msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "passepasse", "passepassepasse");
+		assertEquals("Erreur : le nouveau mot de passe et sa confirmation sont différents.", msg);
+		
+		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "passepasse", "passepasse");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "mdputilisateurrrr", "mdputilisateurrrr");
+		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
+		
+		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "mdputilisateur", "mdputilisateur");
+		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
+	}	
 
 
 	@Test
