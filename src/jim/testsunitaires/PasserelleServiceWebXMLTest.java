@@ -19,8 +19,16 @@ public class PasserelleServiceWebXMLTest {
 	
 	@Test
 	public void testConnecter() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.connecter("admin", "adminnnnnnnn");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.connecter("admin", Outils.sha1("mdpadmin"));
+		assertEquals("Administrateur authentifié.", msg);
+		
+		msg = PasserelleServicesWebXML.connecter("europa", Outils.sha1("mdputilisateur"));
+		assertEquals("Utilisateur authentifié.", msg);	
 	}
+
 		
 	@Test
 	public void testCreerUnUtilisateur() {
