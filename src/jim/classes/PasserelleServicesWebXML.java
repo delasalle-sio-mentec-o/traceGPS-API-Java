@@ -25,7 +25,8 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	// Adresse de l'hébergeur Internet
 	//private static String _adresseHebergeur = "http://sio.lyceedelasalle.fr/tracegps/services/";
 	// Adresse du localhost en cas d'exécution sur le poste de développement (projet de tests des classes)
-	private static String _adresseHebergeur = "http://127.0.0.1/ws-php-cartron/tracegps/services/";
+	private static String _adresseHebergeur = "http://serv-wamp1/LesSites/SIO1_2017_2018/Mentec/tracegpsV1/tracegps/services/";
+	
 
 	// Noms des services web déjà traités par la passerelle
 	private static String _urlArreterEnregistrementParcours = "ArreterEnregistrementParcours.php";
