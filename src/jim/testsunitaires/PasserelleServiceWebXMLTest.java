@@ -37,9 +37,26 @@ public class PasserelleServiceWebXMLTest {
 	
 	@Test
 	public void testSupprimerUnUtilisateur() {
-		fail("Not yet implemented");	
+		String msg;
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("europa", Outils.sha1("mdputilisateurrrrrr"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("europa", Outils.sha1("mdputilisateur"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadminnnnn"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "toto");
+		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "neon");
+		assertEquals("Erreur : suppression impossible ; cet utilisateur possède encore des traces.", msg);	
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "turlututu");
+		assertEquals("Suppression effectuée ; un courriel va être envoyé à l'utilisateur.", msg);	
 	}
-	
+
 	@Test
 	public void testChangerDeMdp() {
 		String msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "passepasse", "passepassepasse");
