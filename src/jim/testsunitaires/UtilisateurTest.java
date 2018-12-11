@@ -119,15 +119,15 @@ public class UtilisateurTest {
 	@Test
 	public void testGetDateCreation() {
 		assertEquals("Test getDateCreation", null, utilisateur1.getDateCreation());	
-		assertEquals("Test getDateCreation", "21/06/2016 14:00:00", utilisateur2.getDateCreation());
+		assertEquals("Test getDateCreation", "21/06/2016 14:00:00", Outils.formaterDateHeureFR(utilisateur2.getDateCreation()));
 	}
 
 	@Test
 	public void testSetDateCreation() throws ParseException {
 		utilisateur1.setDateCreation(Outils.convertirEnDateHeure("22/06/2016 14:30:00"));
 		utilisateur2.setDateCreation(Outils.convertirEnDateHeure("23/06/2016 14:42:00"));
-		assertEquals("Test setDateCreation", "22/06/2016 14:30:00", utilisateur1.getDateCreation());	
-		assertEquals("Test setDateCreation", "23/06/2016 14:42:00", utilisateur2.getDateCreation());
+		assertEquals("Test setDateCreation", "22/06/2016 14:30:00", Outils.formaterDateHeureFR(utilisateur1.getDateCreation()));	
+		assertEquals("Test setDateCreation", "23/06/2016 14:42:00", Outils.formaterDateHeureFR(utilisateur2.getDateCreation()));
 	}
 
 	@Test
@@ -147,15 +147,15 @@ public class UtilisateurTest {
 	@Test
 	public void testGetDateDerniereTrace() {
 		assertEquals("Test getDateDerniereTrace", null, utilisateur1.getDateDerniereTrace());	
-		assertEquals("Test getDateDerniereTrace", "28/06/2016 14:00:00", utilisateur2.getDateDerniereTrace());
+		assertEquals("Test getDateDerniereTrace", "28/06/2016 14:00:00", Outils.formaterDateHeureFR(utilisateur2.getDateDerniereTrace()));
 	}
 
 	@Test
 	public void testSetDateDerniereTrace() throws ParseException {
 		utilisateur1.setDateDerniereTrace(Outils.convertirEnDateHeure("23/06/2016 14:30:00"));
 		utilisateur2.setDateDerniereTrace(Outils.convertirEnDateHeure("24/06/2016 14:42:00"));
-		assertEquals("Test setDateDerniereTrace", "23/06/2016 14:30:00", utilisateur1.getDateDerniereTrace());	
-		assertEquals("Test setDateDerniereTrace", "24/06/2016 14:42:00", utilisateur2.getDateDerniereTrace());
+		assertEquals("Test setDateDerniereTrace", "23/06/2016 14:30:00", Outils.formaterDateHeureFR(utilisateur1.getDateDerniereTrace()));	
+		assertEquals("Test setDateDerniereTrace", "24/06/2016 14:42:00", Outils.formaterDateHeureFR(utilisateur2.getDateDerniereTrace()));
 	}
 
 	@Test
