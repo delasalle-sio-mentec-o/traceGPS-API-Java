@@ -34,92 +34,128 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");	
+		assertEquals("Test getId", 0, utilisateur1.getId());	
+		assertEquals("Test getId", 111, utilisateur2.getId());	
 	}
 
 	@Test
 	public void testSetId() {
-		fail("Not yet implemented");
+		utilisateur1.setId(4);
+		utilisateur2.setId(5);
+		assertEquals("Test setId", 4, utilisateur1.getId());	
+		assertEquals("Test setId", 5, utilisateur2.getId());
 	}
 
 	@Test
 	public void testGetPseudo() {
-		fail("Not yet implemented");
+		assertEquals("Test getPseudo", "", utilisateur1.getPseudo());	
+		assertEquals("Test getPseudo", "toto", utilisateur2.getPseudo());	
 	}
 
 	@Test
 	public void testSetPseudo() {
-		fail("Not yet implemented");
+		utilisateur1.setPseudo("jean");
+		utilisateur2.setPseudo("charles");
+		assertEquals("Test setPseudo", "jean", utilisateur1.getPseudo());	
+		assertEquals("Test setPseudo", "charles", utilisateur2.getPseudo());
 	}
 
 	@Test
 	public void testGetMdpSha1() {
-		fail("Not yet implemented");
+		assertEquals("Test getMdpSha1", "", utilisateur1.getMdpSha1());	
+		assertEquals("Test getMdpSha1", "abcdef", utilisateur2.getMdpSha1());
 	}
 
 	@Test
 	public void testSetMdpSha1() {
-		fail("Not yet implemented");
+		utilisateur1.setMdpSha1("zqsd");
+		utilisateur2.setMdpSha1("azer");
+		assertEquals("Test setMdpSha1", "zqsd", utilisateur1.getMdpSha1());	
+		assertEquals("Test setMdpSha1", "azer", utilisateur2.getMdpSha1());
 	}
 
 	@Test
 	public void testGetAdrMail() {
-		fail("Not yet implemented");
+		assertEquals("Test getAdrMail", "", utilisateur1.getAdrMail());	
+		assertEquals("Test getAdrMail", "toto@free.fr", utilisateur2.getAdrMail());
 	}
 
 	@Test
 	public void testSetAdrMail() {
-		fail("Not yet implemented");
+		utilisateur1.setAdrMail("mentec@gmail.com");
+		utilisateur2.setAdrMail("oui@gmail.com");
+		assertEquals("Test setAdrMail", "mentec@gmail.com", utilisateur1.getAdrMail());	
+		assertEquals("Test setAdrMail", "oui@gmail.com", utilisateur2.getAdrMail());
 	}
 
 	@Test
 	public void testGetNumTel() {
-		fail("Not yet implemented");
+		assertEquals("Test getNumTel", "", utilisateur1.getNumTel());	
+		assertEquals("Test getNumTel", "11.22.33.44.55", utilisateur2.getNumTel());
 	}
 
 	@Test
 	public void testSetNumTel() {
-		fail("Not yet implemented");
+		utilisateur1.setNumTel("2233445566");
+		utilisateur2.setNumTel("9988776655");
+		assertEquals("Test setNumTel", "22.33.44.55.66", utilisateur1.getNumTel());	
+		assertEquals("Test setNumTel", "99.88.77.66.55", utilisateur2.getNumTel());
 	}
 
 	@Test
 	public void testGetNiveau() {
-		fail("Not yet implemented");
+		assertEquals("Test getNiveau", 0, utilisateur1.getNiveau());	
+		assertEquals("Test getNiveau", 1, utilisateur2.getNiveau());
 	}
 
 	@Test
 	public void testSetNiveau() {
-		fail("Not yet implemented");
+		utilisateur1.setNiveau(2);
+		utilisateur2.setNiveau(4);
+		assertEquals("Test setNiveau", 2, utilisateur1.getNiveau());	
+		assertEquals("Test setNiveau", 4, utilisateur2.getNiveau());
 	}
 
 	@Test
 	public void testGetDateCreation() {
-		fail("Not yet implemented");
+		assertEquals("Test getDateCreation", null, utilisateur1.getDateCreation());	
+		assertEquals("Test getDateCreation", "21/06/2016 14:00:00", utilisateur2.getDateCreation());
 	}
 
 	@Test
 	public void testSetDateCreation() throws ParseException {
-		fail("Not yet implemented");
+		utilisateur1.setDateCreation(Outils.convertirEnDateHeure("22/06/2016 14:30:00"));
+		utilisateur2.setDateCreation(Outils.convertirEnDateHeure("23/06/2016 14:42:00"));
+		assertEquals("Test setDateCreation", "22/06/2016 14:30:00", utilisateur1.getDateCreation());	
+		assertEquals("Test setDateCreation", "23/06/2016 14:42:00", utilisateur2.getDateCreation());
 	}
 
 	@Test
 	public void testGetNbTraces() {
-		fail("Not yet implemented");
+		assertEquals("Test getNbTraces", 0, utilisateur1.getNbTraces());	
+		assertEquals("Test getNbTraces", 3, utilisateur2.getNbTraces());
 	}
 
 	@Test
 	public void testSetNbTraces() {
-		fail("Not yet implemented");
+		utilisateur1.setNbTraces(12);
+		utilisateur2.setNbTraces(42);
+		assertEquals("Test setNbTraces", 12, utilisateur1.getNbTraces());	
+		assertEquals("Test setNbTraces", 42, utilisateur2.getNbTraces());
 	}
 
 	@Test
 	public void testGetDateDerniereTrace() {
-		fail("Not yet implemented");
+		assertEquals("Test getDateDerniereTrace", null, utilisateur1.getDateDerniereTrace());	
+		assertEquals("Test getDateDerniereTrace", "28/06/2016 14:00:00", utilisateur2.getDateDerniereTrace());
 	}
 
 	@Test
 	public void testSetDateDerniereTrace() throws ParseException {
-		fail("Not yet implemented");
+		utilisateur1.setDateDerniereTrace(Outils.convertirEnDateHeure("23/06/2016 14:30:00"));
+		utilisateur2.setDateDerniereTrace(Outils.convertirEnDateHeure("24/06/2016 14:42:00"));
+		assertEquals("Test setDateDerniereTrace", "23/06/2016 14:30:00", utilisateur1.getDateDerniereTrace());	
+		assertEquals("Test setDateDerniereTrace", "24/06/2016 14:42:00", utilisateur2.getDateDerniereTrace());
 	}
 
 	@Test
