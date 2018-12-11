@@ -32,12 +32,46 @@ public class PasserelleServiceWebXMLTest {
 		
 	@Test
 	public void testCreerUnUtilisateur() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.creerUnUtilisateur("jim", "delasalle.sio.eleves@gmail.com", "1122334455");
+		assertEquals("Erreur : pseudo trop court (8 car minimum) ou déjà existant.", msg);
+		
+		msg = PasserelleServicesWebXML.creerUnUtilisateur("turlututu", "delasalle.sio.elevesgmail.com", "1122334455");
+		assertEquals("Erreur : adresse mail incorrecte ou déjà existante.", msg);
+
+		msg = PasserelleServicesWebXML.creerUnUtilisateur("turlututu", "delasalle.sio.eleves@gmailcom", "1122334455");
+		assertEquals("Erreur : adresse mail incorrecte ou déjà existante.", msg);
+		
+		msg = PasserelleServicesWebXML.creerUnUtilisateur("turlututu", "delasalle.sio.eleves@gmail.com", "1122334455");
+		assertEquals("Erreur : adresse mail incorrecte ou déjà existante.", msg);
+		
+		msg = PasserelleServicesWebXML.creerUnUtilisateur("turlututu", "delasallesioeleves@gmail.com", "1122334455");
+		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel avec votre mot de passe.", msg);
+		
+		msg = PasserelleServicesWebXML.creerUnUtilisateur("turlututu", "de.la.salle.sio.eleves@gmail.com", "1122334455");
+		assertEquals("Erreur : pseudo trop court (8 car minimum) ou déjà existant.", msg);	
 	}
+
 	
 	@Test
 	public void testSupprimerUnUtilisateur() {
-		fail("Not yet implemented");	
+		String msg;
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("europa", Outils.sha1("mdputilisateurrrrrr"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("europa", Outils.sha1("mdputilisateur"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadminnnnn"), "toto");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "toto");
+		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "neon");
+		assertEquals("Erreur : suppression impossible ; cet utilisateur possède encore des traces.", msg);	
+		
+		msg = PasserelleServicesWebXML.supprimerUnUtilisateur("admin", Outils.sha1("mdpadmin"), "turlututu");
+		assertEquals("Suppression effectuée ; un courriel va être envoyé à l'utilisateur.", msg);	
 	}
 	
 	//@Test
@@ -58,7 +92,12 @@ public class PasserelleServiceWebXMLTest {
 
 	@Test
 	public void testDemanderMdp() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.demanderMdp("jim");
+		assertEquals("Erreur : pseudo inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.demanderMdp("europa");
+		assertEquals("Vous allez recevoir un courriel avec votre nouveau mot de passe.", msg);
+
 	}
 	
 	@Test
@@ -80,27 +119,92 @@ public class PasserelleServiceWebXMLTest {
 	
 	@Test
 	public void testRetirerUneAutorisation() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.retirerUneAutorisation("europa", Outils.sha1("mdputilisateurrrrrr"), "toto", "coucou");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.retirerUneAutorisation("europa", Outils.sha1("mdputilisateur"), "toto", "coucou");
+		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.retirerUneAutorisation("europa", Outils.sha1("mdputilisateur"), "juno", "coucou");
+		assertEquals("Erreur : l'autorisation n'�tait pas accord�e.", msg);	
+		
+		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "oxygen", "coucou");
+		assertEquals("Autorisation supprim�e ; oxygen va recevoir un courriel de notification.", msg);	
+		
+		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "photon", "");
+		assertEquals("Autorisation supprim�e.", msg);
+
 	}
 	
 	@Test
 	public void testEnvoyerPosition() throws ParseException {
-		fail("Not yet implemented");
+		Date laDate = Outils.convertirEnDateHeure("24/01/2018 13:42:21");
+		
+		PointDeTrace lePoint = new PointDeTrace(23, 0, 48.15, -1.68, 50, laDate, 80);
+		String msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateurrrrrr"), lePoint);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		lePoint = new PointDeTrace(2333, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
+		assertEquals("Erreur : le num�ro de trace n'existe pas.", msg);
+		
+		lePoint = new PointDeTrace(22, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
+		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);	
+		
+		lePoint = new PointDeTrace(4, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
+		assertEquals("Point cr��.", msg);	
+
 	}
 
 	@Test
 	public void testDemarrerEnregistrementParcours() {
-		fail("Not yet implemented");
+		Trace laTrace = new Trace();
+		String msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), laTrace);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		laTrace = new Trace();
+		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
+		assertEquals("Trace cr��e.", msg);	
+
 	}
 
 	@Test
 	public void testArreterEnregistrementParcours() {
-		fail("Not yet implemented");
+		String msg;
+
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), 23);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 230);
+		assertEquals("Erreur : parcours inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 5);
+		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
+		assertEquals("Erreur : cette trace est d�j� termin�e.", msg);	
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
+		assertEquals("Enregistrement termin�.", msg);	
+
 	}
 	
 	@Test
 	public void testSupprimerUnUnParcours() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateurrrrrr"), 10);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 100);
+		assertEquals("Erreur : parcours inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
+		assertEquals("Erreur : vous n'�tes pas le propri�taire de ce parcours.", msg);	
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
+		assertEquals("Parcours supprim�.", msg);	
+
 	}
 	
 } // fin du test
