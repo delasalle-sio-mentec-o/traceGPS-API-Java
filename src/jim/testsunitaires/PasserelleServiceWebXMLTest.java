@@ -159,17 +159,51 @@ public class PasserelleServiceWebXMLTest {
 
 	@Test
 	public void testDemarrerEnregistrementParcours() {
-		fail("Not yet implemented");
+		Trace laTrace = new Trace();
+		String msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), laTrace);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		laTrace = new Trace();
+		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
+		assertEquals("Trace créée.", msg);	
+
 	}
 
 	@Test
 	public void testArreterEnregistrementParcours() {
-		fail("Not yet implemented");
+		String msg;
+
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), 23);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 230);
+		assertEquals("Erreur : parcours inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 5);
+		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
+		assertEquals("Erreur : cette trace est déjà terminée.", msg);	
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
+		assertEquals("Enregistrement terminé.", msg);	
+
 	}
 	
 	@Test
 	public void testSupprimerUnUnParcours() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateurrrrrr"), 10);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 100);
+		assertEquals("Erreur : parcours inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
+		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
+		
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
+		assertEquals("Parcours supprimé.", msg);	
+
 	}
 	
 } // fin du test
