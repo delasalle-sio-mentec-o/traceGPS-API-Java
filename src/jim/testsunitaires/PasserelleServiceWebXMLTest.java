@@ -17,17 +17,17 @@ import jim.classes.Utilisateur;
 
 public class PasserelleServiceWebXMLTest {
 	
-	@Test
-	public void testConnecter() {
-		String msg = PasserelleServicesWebXML.connecter("admin", "adminnnnnnnn");
-		assertEquals("Erreur : authentification incorrecte.", msg);
-		
-		msg = PasserelleServicesWebXML.connecter("admin", Outils.sha1("mdpadmin"));
-		assertEquals("Administrateur authentifié.", msg);
-		
-		msg = PasserelleServicesWebXML.connecter("europa", Outils.sha1("mdputilisateur"));
-		assertEquals("Utilisateur authentifié.", msg);	
-	}
+	//@Test
+//	public void testConnecter() {
+//		String msg = PasserelleServicesWebXML.connecter("admin", "adminnnnnnnn");
+//		assertEquals("Erreur : authentification incorrecte.", msg);
+//		
+//		msg = PasserelleServicesWebXML.connecter("admin", Outils.sha1("mdpadmin"));
+//		assertEquals("Administrateur authentifié.", msg);
+//		
+//		msg = PasserelleServicesWebXML.connecter("europa", Outils.sha1("mdputilisateur"));
+//		assertEquals("Utilisateur authentifié.", msg);	
+//	}
 
 		
 	@Test
@@ -40,20 +40,20 @@ public class PasserelleServiceWebXMLTest {
 		fail("Not yet implemented");	
 	}
 	
-	@Test
-	public void testChangerDeMdp() {
-		String msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "passepasse", "passepassepasse");
-		assertEquals("Erreur : le nouveau mot de passe et sa confirmation sont différents.", msg);
-		
-		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "passepasse", "passepasse");
-		assertEquals("Erreur : authentification incorrecte.", msg);
-		
-		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "mdputilisateurrrr", "mdputilisateurrrr");
-		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
-		
-		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "mdputilisateur", "mdputilisateur");
-		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
-	}	
+	//@Test
+//	public void testChangerDeMdp() {
+//		String msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "passepasse", "passepassepasse");
+//		assertEquals("Erreur : le nouveau mot de passe et sa confirmation sont différents.", msg);
+//		
+//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "passepasse", "passepasse");
+//		assertEquals("Erreur : authentification incorrecte.", msg);
+//		
+//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateur"), "mdputilisateurrrr", "mdputilisateurrrr");
+//		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
+//		
+//		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "mdputilisateur", "mdputilisateur");
+//		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
+//	}	
 
 
 	@Test
@@ -63,7 +63,19 @@ public class PasserelleServiceWebXMLTest {
 	
 	@Test
 	public void testDemanderUneAutorisation() {
-		fail("Not yet implemented");	
+		String msg = PasserelleServicesWebXML.demanderUneAutorisation("europa", Outils.sha1("mdputilisateurrrrrr"), "toto", "", "");
+		assertEquals("Erreur : données incomplètes.", msg);
+
+		msg = PasserelleServicesWebXML.demanderUneAutorisation("europa", Outils.sha1("mdputilisateurrrrrr"), "toto", "coucou", "charles-edouard");
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXML.demanderUneAutorisation("europa", Outils.sha1("mdputilisateur"), "toto", "coucou", "charles-edouard");
+		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
+		
+		msg = PasserelleServicesWebXML.demanderUneAutorisation("europa", Outils.sha1("mdputilisateur"), "galileo", "coucou", "charles-edouard");
+		assertEquals("galileo va recevoir un courriel avec votre demande.", msg);	
+
+	
 	}	
 	
 	@Test
