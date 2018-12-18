@@ -44,21 +44,27 @@ public class TestPasserelleServicesWebXML {
 
 
 		// test visuel de la méthode getLesUtilisateursQuiMautorisent
-		ArrayList<Utilisateur> lesUtilisateurs = new ArrayList<Utilisateur>();
-		msg = PasserelleServicesWebXML.getLesUtilisateursQuiMautorisent("galileo", Outils.sha1("mdputilisateur"), lesUtilisateurs);
-		// affichage de la réponse
-		System.out.println(msg);
-		// affichage du nombre d'utilisateurs
-		System.out.println("Nombre d'utilisateurs : " + lesUtilisateurs.size());
-		// affichage de tous les utilisateurs
-		for (Utilisateur unUtilisateur : lesUtilisateurs)
-		{	System.out.println(unUtilisateur.toString());
-		}
+//		ArrayList<Utilisateur> lesUtilisateurs = new ArrayList<Utilisateur>();
+//		msg = PasserelleServicesWebXML.getLesUtilisateursQuiMautorisent("galileo", Outils.sha1("mdputilisateur"), lesUtilisateurs);
+//		// affichage de la réponse
+//		System.out.println(msg);
+//		// affichage du nombre d'utilisateurs
+//		System.out.println("Nombre d'utilisateurs : " + lesUtilisateurs.size());
+//		// affichage de tous les utilisateurs
+//		for (Utilisateur unUtilisateur : lesUtilisateurs)
+//		{	System.out.println(unUtilisateur.toString());
+//		}
 
 		
 		// test visuel de la méthode getLesParcoursDunUtilisateur
 
-		
+//		Trace laTrace = new Trace();
+//		msg = PasserelleServicesWebXML.getUnParcoursEtSesPoints("europa", Outils.sha1("mdputilisateur"), 2, laTrace);
+//		// affichage de la réponse
+//		System.out.println(msg);
+//		// affichage de la trace
+//		System.out.println(laTrace.toString());
+
 		// test visuel de la méthode getUnParcoursEtSesPoints
 
 	

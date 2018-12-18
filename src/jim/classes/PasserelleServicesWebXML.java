@@ -536,7 +536,7 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
 			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
 
-			NodeList listeNoeudsUtilisateurs = leDocument.getElementsByTagName("trace");
+			NodeList listeNoeudsTrace = leDocument.getElementsByTagName("trace");
 			/* Exemple de données obtenues pour un utilisateur :
 				<utilisateur>
 					<id>2</id>
@@ -554,30 +554,51 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 			//laTrace.clear();
 
 			// parcours de la liste des noeuds <trace> et ajout dans la collection lesUtilisateurs
-			for (int i = 0 ; i <= listeNoeudsUtilisateurs.getLength()-1 ; i++)
+			for (int i = 0 ; i <= listeNoeudsTrace.getLength()-1 ; i++)
 			{	// création de l'élément courant à chaque tour de boucle
-				Element courant = (Element) listeNoeudsUtilisateurs.item(i);
+				Element courant = (Element) listeNoeudsTrace.item(i);
 
 				// lecture des balises intérieures
 				int unId = Integer.parseInt(courant.getElementsByTagName("id").item(0).getTextContent());
-				String unPseudo = courant.getElementsByTagName("pseudo").item(0).getTextContent();
-				String unMdpSha1 = "";								// par sécurité, on ne récupère pas le mot de passe
-				String uneAdrMail = courant.getElementsByTagName("adrMail").item(0).getTextContent();
-				String unNumTel = courant.getElementsByTagName("numTel").item(0).getTextContent();
-				int unNiveau = Integer.parseInt(courant.getElementsByTagName("niveau").item(0).getTextContent());
-				Date uneDateCreation = Outils.convertirEnDate(courant.getElementsByTagName("dateCreation").item(0).getTextContent(), formatDateUS);
-				int unNbTraces = Integer.parseInt(courant.getElementsByTagName("nbTraces").item(0).getTextContent());
-				Date uneDateDerniereTrace = null;
-				if (unNbTraces > 0)
-					uneDateDerniereTrace = Outils.convertirEnDate(courant.getElementsByTagName("dateDerniereTrace").item(0).getTextContent(), formatDateUS);
+				Date uneDateHeureDebut = Outils.convertirEnDate(courant.getElementsByTagName("dateHeureDebut").item(0).getTextContent(), formatDateUS);
+				int intTerminee = Integer.parseInt(courant.getElementsByTagName("terminee").item(0).getTextContent());
+				Date uneDateHeureFin = null;
+				int unIdUtilisateur = Integer.parseInt(courant.getElementsByTagName("idUtilisateur").item(0).getTextContent());
+				boolean terminee = false;
+				if(intTerminee == 1) 
+					 terminee = true;
+				
 
-				// crée un objet Utilisateur
-				PointDeTrace unPoint = new PointDeTrace();
+				if (terminee) {
+					uneDateHeureFin = Outils.convertirEnDate(courant.getElementsByTagName("dateHeureFin").item(0).getTextContent(), formatDateUS);
+				}
+				
+				laTrace.setId(unId);
+				laTrace.setDateHeureDebut(uneDateHeureDebut);
+				laTrace.setTerminee(terminee);
+				laTrace.setDateHeureFin(uneDateHeureFin);
+				laTrace.setIdUtilisateur(unIdUtilisateur);
 
 				// ajoute l'utilisateur à la collection lesUtilisateurs
-				laTrace.ajouterPoint(unPoint);
 			}
+			NodeList listeNoeudsPoint = leDocument.getElementsByTagName("point");
+			for (int i = 0 ; i <= listeNoeudsPoint.getLength()-1 ; i++)
+			{
+				Element courant = (Element) listeNoeudsPoint.item(i);
+				
+				// lecture des balises intérieures
+				int unId = Integer.parseInt(courant.getElementsByTagName("id").item(0).getTextContent());
+				double uneLatitude = Double.parseDouble(courant.getElementsByTagName("latitude").item(0).getTextContent());
+				double uneLongitude = Double.parseDouble(courant.getElementsByTagName("longitude").item(0).getTextContent());
+				double uneAltitude = Double.parseDouble(courant.getElementsByTagName("altitude").item(0).getTextContent());
+				Date uneDateHeure = Outils.convertirEnDate(courant.getElementsByTagName("dateHeure").item(0).getTextContent(), formatDateUS);
+				int unRythmeCardio = Integer.parseInt(courant.getElementsByTagName("rythmeCardio").item(0).getTextContent());
 
+				PointDeTrace unPointDeTrace = new PointDeTrace(idTrace, unId, uneLatitude, uneLongitude, uneAltitude, uneDateHeure, unRythmeCardio);
+				laTrace.ajouterPoint(unPointDeTrace);
+
+			}
+			
 			// retour de la réponse du service web
 			return reponse;
 		}
