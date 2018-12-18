@@ -180,13 +180,13 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 5);
-		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);
+		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
-		assertEquals("Erreur : cette trace est d�j� termin�e.", msg);	
+		assertEquals("Erreur : cette trace est déjà terminée.", msg);	
 		
-		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
-		assertEquals("Enregistrement termin�.", msg);	
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 3);
+		assertEquals("Enregistrement terminé.", msg);	
 
 	}
 	
