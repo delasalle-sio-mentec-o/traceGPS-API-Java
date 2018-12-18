@@ -652,6 +652,30 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	public static String supprimerUnParcours(String pseudo, String mdpSha1, int idTrace)
 	{
 		return "";				// METHODE A CREER ET TESTER
+		try
+		{	// crÃ©ation d'un nouveau document XML Ã  partir de l'URL du service web et des paramÃ¨tres
+			String urlDuServiceWeb = _adresseHebergeur + _urlSupprimerUnParcours;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + idTrace;
+
+			// crÃ©ation d'un flux en lecture (InputStream) Ã  partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// crÃ©ation d'un objet org.w3c.dom.Document Ã  partir du flux ; il servira Ã  parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la rÃ©ponse du service web
+			return reponse;
+	}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// MÃ©thode statique pour dÃ©marrer l'enregistrement d'un parcours (service DemarrerEnregistrementParcours.php)
@@ -729,6 +753,30 @@ NodeList listeNoeudsTrace = leDocument.getElementsByTagName("trace");
 	public static String arreterEnregistrementParcours(String pseudo, String mdpSha1, int idTrace)
 	{
 		return "";				// METHODE A CREER ET TESTER
+		try
+		{	// crÃ©ation d'un nouveau document XML Ã  partir de l'URL du service web et des paramÃ¨tres
+			String urlDuServiceWeb = _adresseHebergeur + _urlArreterEnregistrementParcours;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + idTrace;
+
+			// crÃ©ation d'un flux en lecture (InputStream) Ã  partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// crÃ©ation d'un objet org.w3c.dom.Document Ã  partir du flux ; il servira Ã  parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la rÃ©ponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 
 } // fin de la classe
