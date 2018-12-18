@@ -661,7 +661,64 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	//    laTrace : un objet Trace (vide) Ã  remplir Ã  partir des donnÃ©es fournies par le service web
 	public static String demarrerEnregistrementParcours(String pseudo, String mdpSha1, Trace laTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlDemarrerEnregistrementParcours;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+			
+NodeList listeNoeudsTrace = leDocument.getElementsByTagName("trace");
+			
+			Element courant = (Element) listeNoeudsTrace.item(0);
+			
+			int unId = Integer.parseInt(courant.getElementsByTagName("id").item(0).getTextContent());
+			Date uneDateHeureDebut = Outils.convertirEnDate(courant.getElementsByTagName("dateHeureDebut").item(0).getTextContent(), formatDateUS);
+			int intTerminee = Integer.parseInt(courant.getElementsByTagName("terminee").item(0).getTextContent());
+			int unIdUtilisateur = Integer.parseInt(courant.getElementsByTagName("idUtilisateur").item(0).getTextContent());
+			
+			laTrace.setId(unId);
+			laTrace.setDateHeureDebut(uneDateHeureDebut);
+			laTrace.setTerminee(false);
+			laTrace.setDateHeureFin(null);
+			laTrace.setIdUtilisateur(unIdUtilisateur);
+
+			// retour de la réponse du service web
+			return reponse;
+			
+			
+		}
+		catch (Exception ex)
+		{	String urlDuServiceWeb = _adresseHebergeur + _urlDemarrerEnregistrementParcours;
+		urlDuServiceWeb += "?pseudo=" + pseudo;
+		urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+		
+
+		// création d'un flux en lecture (InputStream) à partir du service
+		InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+		// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+		Document leDocument = getDocumentXML(unFluxEnLecture);
+
+		// parsing du flux XML
+		Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+		reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+		return reponse;
+		}
+		
+		
+		
 	}
 		
 	// MÃ©thode statique pour terminer l'enregistrement d'un parcours (service ArreterEnregistrementParcours.php)

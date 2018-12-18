@@ -145,7 +145,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(2333, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Erreur : le num�ro de trace n'existe pas.", msg);
+		assertEquals("Erreur : le numéro de trace n'existe pas.", msg);
 		
 		lePoint = new PointDeTrace(22, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
@@ -153,7 +153,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(4, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Point cr��.", msg);	
+		assertEquals("Point crée.", msg);	
 
 	}
 
@@ -165,7 +165,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		laTrace = new Trace();
 		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
-		assertEquals("Trace cr��e.", msg);	
+		assertEquals("Trace créée.", msg);	
 
 	}
 
@@ -180,13 +180,13 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 5);
-		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);
+		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
-		assertEquals("Erreur : cette trace est d�j� termin�e.", msg);	
+		assertEquals("Erreur : cette trace est déja terminée.", msg);	
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
-		assertEquals("Enregistrement termin�.", msg);	
+		assertEquals("Enregistrement terminé.", msg);	
 
 	}
 	
@@ -199,11 +199,11 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
-		assertEquals("Erreur : vous n'�tes pas le propri�taire de ce parcours.", msg);	
+		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
 		
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
-		assertEquals("Parcours supprim�.", msg);	
-
+		assertEquals("Parcours supprimé.", msg);	
 	}
+
 	
 } // fin du test
