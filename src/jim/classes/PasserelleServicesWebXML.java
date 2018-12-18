@@ -651,7 +651,7 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	//   idTrace : l'id de la trace Ã  supprimer
 	public static String supprimerUnParcours(String pseudo, String mdpSha1, int idTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
 		try
 		{	// crÃ©ation d'un nouveau document XML Ã  partir de l'URL du service web et des paramÃ¨tres
 			String urlDuServiceWeb = _adresseHebergeur + _urlSupprimerUnParcours;
@@ -671,7 +671,7 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 
 			// retour de la rÃ©ponse du service web
 			return reponse;
-	}
+		}
 		catch (Exception ex)
 		{	String msg = "Erreur : " + ex.getMessage();
 			return msg;
@@ -752,7 +752,7 @@ NodeList listeNoeudsTrace = leDocument.getElementsByTagName("trace");
 	//    idTrace : l'id de la trace Ã  terminer
 	public static String arreterEnregistrementParcours(String pseudo, String mdpSha1, int idTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
 		try
 		{	// crÃ©ation d'un nouveau document XML Ã  partir de l'URL du service web et des paramÃ¨tres
 			String urlDuServiceWeb = _adresseHebergeur + _urlArreterEnregistrementParcours;
