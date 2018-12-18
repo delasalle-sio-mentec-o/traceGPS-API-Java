@@ -199,10 +199,10 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
-		assertEquals("Erreur : vous n'�tes pas le propri�taire de ce parcours.", msg);	
+		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
 		
-		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
-		assertEquals("Parcours supprim�.", msg);	
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 21);
+		assertEquals("Parcours supprimé.", msg);
 
 	}
 	
