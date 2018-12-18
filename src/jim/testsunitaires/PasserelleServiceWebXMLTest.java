@@ -96,8 +96,7 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : pseudo inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.demanderMdp("europa");
-		assertEquals("Vous allez recevoir un courriel avec votre nouveau mot de passe.", msg);
-
+		assertEquals("Vous allez recevoir un courriel  de confirmation.", msg);
 	}
 	
 	@Test
