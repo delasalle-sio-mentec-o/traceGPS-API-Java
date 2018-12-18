@@ -86,7 +86,7 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
 		
 		msg = PasserelleServicesWebXML.changerDeMdp("europa", Outils.sha1("mdputilisateurrrr"), "mdputilisateur", "mdputilisateur");
-		assertEquals("Enregistrement effectué ; vous allez recevoir un courriel de confirmation.", msg);
+		assertEquals("Erreur : authentification incorrecte.", msg);
 	}	
 
 
