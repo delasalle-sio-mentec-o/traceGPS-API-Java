@@ -125,13 +125,13 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("europa", Outils.sha1("mdputilisateur"), "juno", "coucou");
-		assertEquals("Erreur : l'autorisation n'�tait pas accord�e.", msg);	
+		assertEquals("Erreur : l'autorisation n'était pas accordée.", msg);	
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "oxygen", "coucou");
-		assertEquals("Autorisation supprim�e ; oxygen va recevoir un courriel de notification.", msg);	
+		assertEquals("Autorisation supprimée ; oxygen va recevoir un courriel de notification.", msg);	
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "photon", "");
-		assertEquals("Autorisation supprim�e.", msg);
+		assertEquals("Autorisation supprimée.", msg);
 
 	}
 	
