@@ -96,8 +96,7 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : pseudo inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.demanderMdp("europa");
-		assertEquals("Vous allez recevoir un courriel avec votre nouveau mot de passe.", msg);
-
+		assertEquals("Vous allez recevoir un courriel  de confirmation.", msg);
 	}
 	
 	@Test
@@ -126,13 +125,13 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("europa", Outils.sha1("mdputilisateur"), "juno", "coucou");
-		assertEquals("Erreur : l'autorisation n'�tait pas accord�e.", msg);	
+		assertEquals("Erreur : l'autorisation n'était pas accordée.", msg);	
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "oxygen", "coucou");
-		assertEquals("Autorisation supprim�e ; oxygen va recevoir un courriel de notification.", msg);	
+		assertEquals("Autorisation supprimée ; oxygen va recevoir un courriel de notification.", msg);	
 		
 		msg = PasserelleServicesWebXML.retirerUneAutorisation("neon", Outils.sha1("mdputilisateur"), "photon", "");
-		assertEquals("Autorisation supprim�e.", msg);
+		assertEquals("Autorisation supprimée.", msg);
 
 	}
 	
@@ -146,7 +145,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(2333, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Erreur : le num�ro de trace n'existe pas.", msg);
+		assertEquals("Erreur : le numéro de trace n'existe pas.", msg);
 		
 		lePoint = new PointDeTrace(22, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
@@ -154,7 +153,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(4, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Point cr��.", msg);	
+		assertEquals("Point crée.", msg);	
 
 	}
 
@@ -166,7 +165,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		laTrace = new Trace();
 		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
-		assertEquals("Trace cr��e.", msg);	
+		assertEquals("Trace créée.", msg);	
 
 	}
 
@@ -181,13 +180,19 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 5);
-		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);
+		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
-		assertEquals("Erreur : cette trace est d�j� termin�e.", msg);	
+<<<<<<< HEAD
+		assertEquals("Erreur : cette trace est déja terminée.", msg);	
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
-		assertEquals("Enregistrement termin�.", msg);	
+=======
+		assertEquals("Erreur : cette trace est déjà terminée.", msg);	
+		
+		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 3);
+>>>>>>> master
+		assertEquals("Enregistrement terminé.", msg);	
 
 	}
 	
@@ -200,11 +205,17 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : parcours inexistant.", msg);
 		
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
-		assertEquals("Erreur : vous n'�tes pas le propri�taire de ce parcours.", msg);	
+		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
 		
+<<<<<<< HEAD
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
-		assertEquals("Parcours supprim�.", msg);	
+		assertEquals("Parcours supprimé.", msg);	
+=======
+		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 21);
+		assertEquals("Parcours supprimé.", msg);
 
+>>>>>>> master
 	}
+
 	
 } // fin du test
