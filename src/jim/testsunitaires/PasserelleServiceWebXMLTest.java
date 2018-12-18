@@ -183,15 +183,15 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
-<<<<<<< HEAD
+
 		assertEquals("Erreur : cette trace est déja terminée.", msg);	
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
-=======
+
 		assertEquals("Erreur : cette trace est déjà terminée.", msg);	
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 3);
->>>>>>> master
+
 		assertEquals("Enregistrement terminé.", msg);	
 
 	}
@@ -207,14 +207,13 @@ public class PasserelleServiceWebXMLTest {
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
 		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
 		
-<<<<<<< HEAD
+
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
 		assertEquals("Parcours supprimé.", msg);	
-=======
+
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 21);
 		assertEquals("Parcours supprimé.", msg);
 
->>>>>>> master
 	}
 
 	
