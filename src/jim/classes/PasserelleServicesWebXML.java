@@ -589,7 +589,73 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	//    lesTraces : collection (vide) à remplir à partir des données fournies par le service web
 	public static String getLesParcoursDunUtilisateur(String pseudo, String mdpSha1, String pseudoConsulte, ArrayList<Trace> lesTraces)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlGetLesParcoursDunUtilisateur;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&pseudoConsulte=" + pseudoConsulte;
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			NodeList listeNoeudsTraces = leDocument.getElementsByTagName("trace");
+			/* Exemple de données obtenues pour un utilisateur :
+				      	<trace>
+					        <id>2</id>
+					        <dateHeureDebut>2018-01-19 13:08:48</dateHeureDebut>
+					        <terminee>1</terminee>
+					        <dateHeureFin>2018-01-19 13:11:48</dateHeureFin>
+					        <distance>1.2</distance>
+					        <idUtilisateur>2</idUtilisateur>
+				     	</trace>
+
+			 */
+
+			// vider d'abord la collection avant de la remplir
+			lesTraces.clear();
+
+			// parcours de la liste des noeuds <utilisateur> et ajout dans la collection lesUtilisateurs
+			for (int i = 0 ; i <= listeNoeudsTraces.getLength()-1 ; i++)
+			{	// création de l'élément courant à chaque tour de boucle
+				Element courant = (Element) listeNoeudsTraces.item(i);
+
+				// lecture des balises intérieures
+				int unId = Integer.parseInt(courant.getElementsByTagName("id").item(0).getTextContent());
+				Date uneDateHeureDebut = Outils.convertirEnDate(courant.getElementsByTagName("dateHeureDebut").item(0).getTextContent(), formatDateUS);
+				
+				int intTerminee = Integer.parseInt(courant.getElementsByTagName("terminee").item(0).getTextContent());
+				boolean terminee = false;
+				if(intTerminee == 1) 
+					 terminee = true;
+				
+				Date uneDateHeureFin = null;
+				if (terminee) {
+					uneDateHeureFin = Outils.convertirEnDate(courant.getElementsByTagName("dateHeureFin").item(0).getTextContent(), formatDateUS);
+				}
+				double uneDistance = Double.parseDouble(courant.getElementsByTagName("distance").item(0).getTextContent());
+				int unIdUtilisateur = Integer.parseInt(courant.getElementsByTagName("idUtilisateur").item(0).getTextContent());
+				
+				Trace laTrace = new Trace(unId, uneDateHeureDebut, uneDateHeureFin, terminee, unIdUtilisateur, uneDistance);
+				
+				lesTraces.add(laTrace);
+			}
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// Méthode statique pour supprimer un parcours (service SupprimerUnParcours.php)
