@@ -214,11 +214,12 @@ public class Trace {
         if (getDateHeureDebut() != null) msg += "Heure de début :\t\t" + Outils.formaterDateHeureFR(getDateHeureDebut()) + "\n";
         if (getDateHeureFin() != null) msg += "Heure de fin :\t\t\t" + Outils.formaterDateHeureFR(getDateHeureFin()) + "\n";
         if (getTerminee()) msg += "Terminée : \t\t\tOui \n"; else msg += "Terminée : \t\t\tNon \n";
-		msg += "Nombre de points :\t\t" + Outils.formaterNombre(getNombrePoints(), "00000") + "\n";
+		msg += "Distance totale en Km :\t\t" + Outils.formaterNombre(getDistanceTotale(), "000.00") + "\n";
+
+        msg += "Nombre de points :\t\t" + Outils.formaterNombre(getNombrePoints(), "00000") + "\n";
 		if (getNombrePoints() > 0) {
 			msg += "Durée en secondes :\t\t" + getDureeEnSecondes() + "\n";
 			msg += "Durée totale :\t\t\t" + getDureeTotale() + "\n";
-			msg += "Distance totale en Km :\t\t" + Outils.formaterNombre(getDistanceTotale(), "000.00") + "\n";
 			msg += "Dénivelé en m :\t\t\t" + Outils.formaterNombre(getDenivele(), "0000.00") + "\n";
             msg += "Dénivelé positif en m :\t\t" + Outils.formaterNombre(getDenivelePositif(), "0000.00") + "\n";
             msg += "Dénivelé négatif en m :\t\t" + Outils.formaterNombre(getDeniveleNegatif(), "0000.00") + "\n";
