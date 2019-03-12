@@ -149,7 +149,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(22, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Erreur : le num�ro de trace ne correspond pas � cet utilisateur.", msg);	
+		assertEquals("Erreur : le numéro de trace ne correspond pas � cet utilisateur.", msg);	
 		
 		lePoint = new PointDeTrace(4, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);

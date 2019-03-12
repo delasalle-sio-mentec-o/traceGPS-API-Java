@@ -532,7 +532,31 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	//    lePoint : un objet PointDeTrace (vide) qui permettra de rÃ©cupÃ©rer le numÃ©ro attribuÃ© Ã  partir des donnÃ©es fournies par le service web
 	public static String envoyerPosition(String pseudo, String mdpSha1, PointDeTrace lePoint)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlEnvoyerPosition;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&pseudoARetirer=" + lePoint;
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// MÃ©thode statique pour obtenir un parcours et la liste de ses points (service GetUnParcoursEtSesPoints.php)
