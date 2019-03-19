@@ -153,7 +153,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		lePoint = new PointDeTrace(4, 0, 48.15, -1.68, 50, laDate, 80);
 		msg = PasserelleServicesWebXML.envoyerPosition("europa", Outils.sha1("mdputilisateur"), lePoint);
-		assertEquals("Point crée.", msg);	
+		assertEquals("Point créé.", msg);	
 
 	}
 
@@ -165,7 +165,7 @@ public class PasserelleServiceWebXMLTest {
 		
 		laTrace = new Trace();
 		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
-		assertEquals("Trace créée.", msg);	
+		assertEquals("Trace cr��e.", msg);	
 
 	}
 
@@ -183,15 +183,9 @@ public class PasserelleServiceWebXMLTest {
 		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 4);
-
-		assertEquals("Erreur : cette trace est déja terminée.", msg);	
-		
-		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 23);
-
 		assertEquals("Erreur : cette trace est déjà terminée.", msg);	
 		
 		msg = PasserelleServicesWebXML.arreterEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), 3);
-
 		assertEquals("Enregistrement terminé.", msg);	
 
 	}
@@ -207,14 +201,9 @@ public class PasserelleServiceWebXMLTest {
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 22);
 		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
 		
-
-		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 30);
-		assertEquals("Parcours supprimé.", msg);	
-
 		msg = PasserelleServicesWebXML.supprimerUnParcours("europa", Outils.sha1("mdputilisateur"), 21);
 		assertEquals("Parcours supprimé.", msg);
 
 	}
-
 	
 } // fin du test

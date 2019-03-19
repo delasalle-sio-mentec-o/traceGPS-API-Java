@@ -538,7 +538,13 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 			String urlDuServiceWeb = _adresseHebergeur + _urlEnvoyerPosition;
 			urlDuServiceWeb += "?pseudo=" + pseudo;
 			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
-			urlDuServiceWeb += "&pseudoARetirer=" + lePoint;
+			urlDuServiceWeb += lePoint.getIdTrace(); 
+			urlDuServiceWeb += lePoint.getDateHeure(); 
+			urlDuServiceWeb += lePoint.getLatitude(); 
+			urlDuServiceWeb += lePoint.getLongitude(); 
+			urlDuServiceWeb += lePoint.getAltitude(); 
+			urlDuServiceWeb += lePoint.getRythmeCardio(); 
+			
 
 			// création d'un flux en lecture (InputStream) à partir du service
 			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
@@ -549,7 +555,31 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 			// parsing du flux XML
 			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
 			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
-
+			System.out.println(urlDuServiceWeb);
+//			NodeList listeNoeudsPoint = leDocument.getElementsByTagName("point");
+//			for (int i = 0 ; i <= listeNoeudsPoint.getLength()-1 ; i++)
+//			{
+//				Element courant = (Element) listeNoeudsPoint.item(i);
+//				
+//				// lecture des balises intérieures
+//				int idTrace = Integer.parseInt(courant.getElementsByTagName("idTrace").item(0).getTextContent());
+//				int unId = Integer.parseInt(courant.getElementsByTagName("id").item(0).getTextContent());
+//				double uneLatitude = Double.parseDouble(courant.getElementsByTagName("latitude").item(0).getTextContent());
+//				double uneLongitude = Double.parseDouble(courant.getElementsByTagName("longitude").item(0).getTextContent());
+//				double uneAltitude = Double.parseDouble(courant.getElementsByTagName("altitude").item(0).getTextContent());
+//				Date uneDateHeure = Outils.convertirEnDate(courant.getElementsByTagName("dateHeure").item(0).getTextContent(), formatDateUS);
+//				int unRythmeCardio = Integer.parseInt(courant.getElementsByTagName("rythmeCardio").item(0).getTextContent());
+//
+//				lePoint.setIdTrace(idTrace);
+//				lePoint.setId(unId);
+//				lePoint.setLatitude(uneLatitude);
+//				lePoint.setLongitude(uneLongitude);
+//				lePoint.setAltitude(uneAltitude);
+//				lePoint.setDateHeure(uneDateHeure);
+//				lePoint.setRythmeCardio(unRythmeCardio);
+//				
+//
+//			}
 			// retour de la réponse du service web
 			return reponse;
 		}
