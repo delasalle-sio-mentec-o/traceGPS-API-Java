@@ -56,9 +56,9 @@ public class TestPasserelleServicesWebXML {
 //		}
 
 		
-		// test visuel de la méthode getUnParcoursEtSesPoints
+//		// test visuel de la méthode getUnParcoursEtSesPoints
 //		Trace laTrace = new Trace();
-//		msg = PasserelleServicesWebXML.getUnParcoursEtSesPoints("europa", Outils.sha1("mdputilisateur"), 2, laTrace);
+//		msg = PasserelleServicesWebXML.getUnParcoursEtSesPoints("europa", Outils.sha1("mdputilisateur"), 3, laTrace);
 //		// affichage de la réponse
 //		System.out.println(msg);
 //		// affichage de la trace

@@ -714,22 +714,12 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
 
 			NodeList listeNoeudsTraces = leDocument.getElementsByTagName("trace");
-			/* Exemple de données obtenues pour un utilisateur :
-				      	<trace>
-					        <id>2</id>
-					        <dateHeureDebut>2018-01-19 13:08:48</dateHeureDebut>
-					        <terminee>1</terminee>
-					        <dateHeureFin>2018-01-19 13:11:48</dateHeureFin>
-					        <distance>1.2</distance>
-					        <idUtilisateur>2</idUtilisateur>
-				     	</trace>
 
-			 */
 
 			// vider d'abord la collection avant de la remplir
 			lesTraces.clear();
-
-			// parcours de la liste des noeuds <utilisateur> et ajout dans la collection lesUtilisateurs
+			
+			// parcours de la liste des noeuds <Trace> et ajout dans la collection lesTraces
 			for (int i = 0 ; i <= listeNoeudsTraces.getLength()-1 ; i++)
 			{	// création de l'élément courant à chaque tour de boucle
 				Element courant = (Element) listeNoeudsTraces.item(i);
@@ -750,7 +740,10 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 				double uneDistance = Double.parseDouble(courant.getElementsByTagName("distance").item(0).getTextContent());
 				int unIdUtilisateur = Integer.parseInt(courant.getElementsByTagName("idUtilisateur").item(0).getTextContent());
 				
+				
 				Trace laTrace = new Trace(unId, uneDateHeureDebut, uneDateHeureFin, terminee, unIdUtilisateur, uneDistance);
+				
+				
 				
 				lesTraces.add(laTrace);
 			}
